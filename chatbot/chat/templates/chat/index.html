@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Chat with Us hahaha!</h1>
+    <div id="chat-box">
+        <!-- Chat will appear here -->
+    </div>
+    <input type="text" id="user-input" placeholder="Type your message..." />
+    <button id="send-message">Send</button>
+
+    <script>
+        $('#send-message').on('click', function() {
+            var userMessage = $('#user-input').val();
+            $('#chat-box').append('<div>User: ' + userMessage + '</div>');
+
+            $.ajax({
+                url: '/chat/',
+                data: { message: userMessage },
+                success: function(response) {
+                    $('#chat-box').append('<div>Chatbot: ' + response.response + '</div>');
+                }
+            });
+        });
+    </script>
+</body> 
+
+</html>
